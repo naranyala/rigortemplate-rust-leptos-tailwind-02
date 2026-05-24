@@ -1,0 +1,26 @@
+# --- Rust / Cargo ---
+/target
+# We commit Cargo.lock for applications to ensure reproducible builds
+
+# Rustfmt backups
+**/*.rs.bk
+
+# Windows debugging info
+*.pdb
+
+# --- Trunk / WASM ---
+/dist
+
+# --- JS / Node / Bun ---
+node_modules/
+.env
+.env.*
+.npm
+.bun-install
+
+# --- IDEs / OS ---
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*~

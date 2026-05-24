@@ -1,0 +1,17 @@
+{
+  "name": "leptos-tailwind",
+  "version": "0.1.0",
+  "scripts": {
+    "tailwind:build": "./node_modules/.bin/tailwindcss -i ./input.css -o ./style/output.css",
+    "tailwind:watch": "./node_modules/.bin/tailwindcss -i ./input.css -o ./style/output.css --watch",
+    "dev": "bun concurrently \"bun run tailwind:watch\" \"trunk serve\"",
+    "build": "bun run tailwind:build && trunk build --release"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "tailwindcss": "^4.3.0"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.3.0"
+  }
+}
