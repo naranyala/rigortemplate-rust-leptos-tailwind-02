@@ -4,7 +4,7 @@
   "scripts": {
     "tailwind:build": "./node_modules/.bin/tailwindcss -i ./input.css -o ./style/output.css",
     "tailwind:watch": "./node_modules/.bin/tailwindcss -i ./input.css -o ./style/output.css --watch",
-    "dev": "bun concurrently \"bun run tailwind:watch\" \"trunk serve\"",
+    "dev": "PORT=$(./scripts/find-port.sh) && bun concurrently \"bun run tailwind:watch\" \"trunk serve --port $PORT\"",
     "build": "bun run tailwind:build && trunk build --release"
   },
   "devDependencies": {

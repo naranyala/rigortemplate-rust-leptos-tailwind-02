@@ -17,19 +17,6 @@ pub fn HooksCatalogView() -> impl IntoView {
 // Use set_open.update(|v| *v = !*v) to toggle"#,
         },
         HookDemo {
-            name: "use_window_size",
-            description: "Tracks the window dimensions reactively.",
-            code: r#"let (width, height) = use_window_size();
-// width and height are ReadSignal<u32>"#,
-        },
-        HookDemo {
-            name: "use_previous",
-            description: "Remembers the previous value of a signal.",
-            code: r#"let (count, set_count) = signal(0);
-let prev_count = use_previous(count);
-// prev_count will be one step behind count"#,
-        },
-        HookDemo {
             name: "use_is_mounted",
             description: "Tracks whether the component is currently mounted in the DOM.",
             code: r#"let is_mounted = use_is_mounted();
@@ -41,49 +28,6 @@ let prev_count = use_previous(count);
             code: r#"let (copied, set_text) = use_clipboard();
 // set_text.set("Hello World".to_string());
 // 'copied' becomes true for 2 seconds"#,
-        },
-        HookDemo {
-            name: "use_media_query",
-            description: "Reactively tracks a CSS media query.",
-            code: r#"let is_mobile = use_media_query("(max-width: 768px)");
-// is_mobile is a ReadSignal<bool>"#,
-        },
-        HookDemo {
-            name: "use_debounce",
-            description: "Debounces a signal's value to prevent rapid updates.",
-            code: r#"let (search, set_search) = signal("".to_string());
-let debounced_search = use_debounce(search, 300);
-// debounced_search updates 300ms after search stops changing"#,
-        },
-        HookDemo {
-            name: "use_interval",
-            description: "A reactive interval timer that can be enabled or disabled.",
-            code: r#"let (active, set_active) = signal(true);
-use_interval(|| { println!("Tick!"); }, 1000, active);"#,
-        },
-        HookDemo {
-            name: "use_session_storage",
-            description: "Syncs state with the browser's Session Storage.",
-            code: r#"let (user, set_user) = use_session_storage("user_pref", "Guest".to_string());
-//Persists for the duration of the page session"#,
-        },
-        HookDemo {
-            name: "use_click_outside",
-            description: "Triggers a callback when a click occurs outside the target element.",
-            code: r#"let my_node = create_node_ref::<html::Div>();
-use_click_outside(my_node, || { println!("Clicked outside!"); });"#,
-        },
-        HookDemo {
-            name: "use_element_size",
-            description: "Tracks the dimensions of a specific DOM element via ResizeObserver.",
-            code: r#"let my_node = create_node_ref::<html::Div>();
-let (width, height) = use_element_size(my_node);"#,
-        },
-        HookDemo {
-            name: "use_intersection_observer",
-            description: "Detects when an element enters or leaves the viewport.",
-            code: r#"let my_node = create_node_ref::<html::Div>();
-let is_visible = use_intersection_observer(my_node, IntersectionObserverInit::default());"#,
         },
     ];
 

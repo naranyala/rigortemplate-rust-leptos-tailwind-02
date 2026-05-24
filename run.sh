@@ -19,11 +19,7 @@ echo "Building Tailwind CSS..."
 bun run tailwind:build || log_error "Tailwind CSS build failed. Check input.css for syntax errors."
 
 # 3. Port Detection Logic
-PORT=8080
-while lsof -Pi :$PORT -sTCP:LISTEN -t >/dev/null ; do
-    echo "Port $PORT is already in use, trying $((PORT + 1))..."
-    PORT=$((PORT + 1))
-done
+PORT=$(./scripts/find-port.sh 8080)
 
 echo "Using port: $PORT"
 

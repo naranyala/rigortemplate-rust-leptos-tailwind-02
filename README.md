@@ -1,82 +1,52 @@
-# 🚀 Leptos Tailwind Boilerplate
+# Leptos Tailwind Boilerplate
 
-A modern, high-performance frontend boilerplate built with **Leptos 0.7**, **Tailwind CSS v4**, and **Trunk**. This project is designed as a foundation for building scalable, reactive web applications with a strong focus on reusable UI primitives and custom hooks.
+A modern, high-performance frontend boilerplate built with Leptos, Tailwind CSS, and Trunk. This project is designed as a foundation for building scalable, reactive web applications with a strong focus on reusable UI primitives and custom hooks.
 
-## 🛠 Tech Stack
+## Tech Stack
 
-- **Framework**: [Leptos 0.7](https://leptos.dev/) (Client-Side Rendering)
-- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
-- **Bundler**: [Trunk](https://trunkrs.dev/)
-- **Runtime/Tooling**: [Bun](https://bun.sh/)
-- **Language**: Rust (Nightly recommended)
+- Framework: Leptos (Client-Side Rendering)
+- Styling: Tailwind CSS
+- Bundler: Trunk
+- Runtime/Tooling: Bun
+- Language: Rust
 
-## 🚀 Getting Started
+## Getting Started
 
-### Prerequisites
+For detailed installation and setup instructions, please refer to the [Getting Started Guide](docs/getting-started.md).
 
-1. **Rust Nightly**:
-   ```bash
-   rustup toolchain install nightly
-   rustup default nightly
-   rustup target add wasm32-unknown-unknown
-   ```
+Quick start:
+```bash
+bun install
+bun run dev
+```
 
-2. **Trunk**:
-   ```bash
-   cargo install trunk
-   ```
+## Project Architecture
 
-3. **Bun**:
-   Install via [bun.sh](https://bun.sh)
+The project is organized into a clean separation between application logic and reusable primitives. For a deep dive into the design patterns used, see the [Architecture Documentation](docs/architecture.md).
 
-### Installation & Development
+### src/stdlib/ (The Foundation)
+The standard library contains reusable utilities:
+- ui/: A collection of atomic UI components and a registry for discovery.
+- hooks/: A set of reusable reactive hooks.
+- services/: API clients and a global service provider pattern.
 
-1. **Clone the repository**:
-   ```bash
-   git clone <repo-url>
-   cd rigortemplate-rust-leptos-tailwind-02
-   ```
+### src/components/ (The Application)
+- layout/: Global shell components (Header, Sidebar, MainLayout).
+- views/: Page-level components.
+- shared/: Application-specific shared components.
 
-2. **Install JS dependencies**:
-   ```bash
-   bun install
-   ```
+## Documentation
 
-3. **Run the development server**:
-   ```bash
-   bun run dev
-   ```
-   This command concurrently runs the Tailwind CSS watcher and the Trunk development server.
+Detailed documentation for the built-in library is available:
+- [UI Library Reference](docs/ui-library.md)
+- [Hooks Reference](docs/hooks.md)
 
-4. **Open the app**:
-   Navigate to [http://localhost:8080](http://localhost:8080) in your browser.
+## Configuration
 
-## 🏗 Project Architecture
+- Tailwind: Configured in tailwind.config.js.
+- Builds: Managed via package.json scripts and Trunk.toml.
+- Routing: Signal-based routing implemented in app.rs.
 
-The project is organized into a clean separation between application logic and reusable primitives:
+## License
 
-### `src/stdlib/` (The Foundation)
-The standard library contains framework-agnostic utilities:
-- **`ui/`**: A collection of atomic UI components (Button, Badge, Modal, etc.) and a `registry` for the catalog.
-- **`hooks/`**: A rich set of reusable reactive hooks (e.g., `use_local_storage`, `use_window_size`, `use_debounce`).
-- **`services/`**: API clients and error handling logic.
-
-### `src/components/` (The Application)
-- **`layout/`**: Global shell components (Header, Sidebar, MainLayout).
-- **`views/`**: Page-level components.
-- **`shared/`**: Application-specific shared components.
-
-## 📚 Component & Hooks Catalog
-
-This project includes a built-in interactive documentation system:
-- **Component Catalog**: Browse all UI primitives, see them in action, and copy the full Rust source code.
-- **Hooks Gallery**: Explore the available reactive hooks with usage examples and descriptions.
-
-## 🛠 Configuration
-
-- **Tailwind**: Configured in `tailwind.config.js`.
-- **Builds**: Managed via `package.json` scripts and `Trunk.toml`.
-- **Routing**: Currently uses a signal-based manual router in `app.rs` and `main_layout.rs`.
-
-## 📝 License
 MIT

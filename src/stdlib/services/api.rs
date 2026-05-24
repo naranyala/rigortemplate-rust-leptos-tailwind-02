@@ -1,5 +1,5 @@
 use reqwest::Client;
-use std::rc::Rc;
+use std::sync::Arc;
 use crate::stdlib::services::errors::AppError;
 
 #[allow(dead_code)]
@@ -10,8 +10,8 @@ pub struct ApiClient {
 
 #[allow(dead_code)]
 impl ApiClient {
-    pub fn new(base_url: &str) -> Rc<Self> {
-        Rc::new(Self {
+    pub fn new(base_url: &str) -> Arc<Self> {
+        Arc::new(Self {
             client: Client::new(),
             base_url: base_url.to_string(),
         })

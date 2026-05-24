@@ -59,62 +59,7 @@ pub(crate) fn highlight_code(code: &str) -> String {
                         if j >= len || bytes[j] != b'#' {
                             ok = false;
                             break;
-// ... existing code ...
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_highlight_keywords() {
-        let code = "fn main() { let x = 5; }";
-        let highlighted = highlight_code(code);
-        assert!(highlighted.contains("text-purple-400"));
-    }
-
-    #[test]
-    fn test_highlight_strings() {
-        let code = r#"let s = "hello";"#;
-        let highlighted = highlight_code(code);
-        assert!(highlighted.contains("text-emerald-400"));
-    }
-
-    #[test]
-    fn test_highlight_raw_strings() {
-        let code = r#"let s = r#"raw string"#";"#;
-        let highlighted = highlight_code(code);
-        assert!(highlighted.contains("text-emerald-400"));
-    }
-
-    #[test]
-    fn test_highlight_comments() {
-        let code = "// this is a comment";
-        let highlighted = highlight_code(code);
-        assert!(highlighted.contains("text-slate-500 italic"));
-    }
-
-    #[test]
-    fn test_highlight_attributes() {
-        let code = "#[component]";
-        let highlighted = highlight_code(code);
-        assert!(highlighted.contains("text-orange-400"));
-    }
-
-    #[test]
-    fn test_highlight_operators() {
-        let code = "fn foo() -> i32 { 1 => 2 }";
-        let highlighted = highlight_code(code);
-        assert!(highlighted.contains("text-slate-400"));
-    }
-
-    #[test]
-    fn test_highlight_pascal_case() {
-        let code = "let x = Button {};";
-        let highlighted = highlight_code(code);
-        assert!(highlighted.contains("text-sky-300"));
-    }
-}
-
+                        }
                         j += 1;
                     }
                     if ok {
@@ -291,5 +236,59 @@ pub fn CodeBlock(code: &'static str) -> impl IntoView {
         <pre class="text-sm font-mono overflow-x-auto p-6 bg-slate-950 rounded-xl leading-relaxed border border-slate-800">
             <code inner_html=highlighted />
         </pre>
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_highlight_keywords() {
+        let code = "fn main() { let x = 5; }";
+        let highlighted = highlight_code(code);
+        assert!(highlighted.contains("text-purple-400"));
+    }
+
+    #[test]
+    fn test_highlight_strings() {
+        let code = r#"let s = "hello";"#;
+        let highlighted = highlight_code(code);
+        assert!(highlighted.contains("text-emerald-400"));
+    }
+
+    #[test]
+    fn test_highlight_raw_strings() {
+        let code = r###"let s = r##"raw string"##;"###;
+        let highlighted = highlight_code(code);
+        assert!(highlighted.contains("text-emerald-400"));
+    }
+
+    #[test]
+    fn test_highlight_comments() {
+        let code = "// this is a comment";
+        let highlighted = highlight_code(code);
+        assert!(highlighted.contains("text-slate-500 italic"));
+    }
+
+    #[test]
+    fn test_highlight_attributes() {
+        let code = "#[component]";
+        let highlighted = highlight_code(code);
+        assert!(highlighted.contains("text-orange-400"));
+    }
+
+    #[test]
+    fn test_highlight_operators() {
+        let code = "fn foo() -> i32 { 1 => 2 }";
+        let highlighted = highlight_code(code);
+        assert!(highlighted.contains("text-slate-400"));
+    }
+
+    #[test]
+    fn test_highlight_pascal_case() {
+        let code = "let x = Button {};";
+        let highlighted = highlight_code(code);
+        assert!(highlighted.contains("text-sky-300"));
     }
 }

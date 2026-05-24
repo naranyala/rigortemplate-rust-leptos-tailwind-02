@@ -2,13 +2,13 @@ use leptos::prelude::*;
 use crate::app::AppRoute;
 
 #[component]
-pub fn Sidebar(route: ReadSignal<AppRoute>) -> impl IntoView {
+pub fn Sidebar() -> impl IntoView {
     let (search, set_search) = signal("".to_string());
     let set_route = use_context::<WriteSignal<AppRoute>>()
         .expect("set_route context not provided");
+
     
     let component_nav = vec![
-        ("Gallery", AppRoute::Catalog),
         ("Accordion Demo", AppRoute::Accordion),
         ("Sliding Panel Demo", AppRoute::Panel),
     ];
@@ -45,23 +45,20 @@ pub fn Sidebar(route: ReadSignal<AppRoute>) -> impl IntoView {
                     <div class="space-y-1">
                         {move || {
                             let query = search.get().to_lowercase();
-                            let current_route = route.get();
                             component_nav.iter()
                                 .filter(|(name, _)| name.to_lowercase().contains(&query))
                                 .map(|(name, route_val)| {
                                     let route_val = *route_val;
-                                    view! {
-                                        <button 
-                                            on:click=move |_| set_route.set(route_val)
-                                            class=move || format!(
-                                                "w-full flex items-center px-4 py-3 text-sm font-medium rounded-xl hover:bg-slate-800 hover:text-white transition-all text-left {}",
-                                                if current_route == route_val { "bg-indigo-600 text-white shadow-lg shadow-indigo-200" } else { "" }
-                                            )
-                                        >
-                                            <span class="mr-3 opacity-40">"•"</span>
-                                            {name.to_string()}
-                                        </button>
-                                    }
+                                     view! {
+                                         <button 
+                                             on:click=move |_| set_route.set(route_val)
+                                             class="w-full flex items-center px-4 py-3 text-sm font-medium rounded-xl hover:bg-slate-800 hover:text-white transition-all text-left"
+                                         >
+                                             <span class="mr-3 opacity-40">"•"</span>
+                                             {name.to_string()}
+                                         </button>
+                                     }
+
                                 }).collect_view()
                         }}
                     </div>
@@ -71,23 +68,20 @@ pub fn Sidebar(route: ReadSignal<AppRoute>) -> impl IntoView {
                     <div class="space-y-1">
                         {move || {
                             let query = search.get().to_lowercase();
-                            let current_route = route.get();
                             hooks_nav.iter()
                                 .filter(|(name, _)| name.to_lowercase().contains(&query))
                                 .map(|(name, route_val)| {
                                     let route_val = *route_val;
-                                    view! {
-                                        <button 
-                                            on:click=move |_| set_route.set(route_val)
-                                            class=move || format!(
-                                                "w-full flex items-center px-4 py-3 text-sm font-medium rounded-xl hover:bg-slate-800 hover:text-white transition-all text-left {}",
-                                                if current_route == route_val { "bg-indigo-600 text-white shadow-lg shadow-indigo-200" } else { "" }
-                                            )
-                                        >
-                                            <span class="mr-3 opacity-40">"•"</span>
-                                            {name.to_string()}
-                                        </button>
-                                    }
+                                     view! {
+                                         <button 
+                                             on:click=move |_| set_route.set(route_val)
+                                             class="w-full flex items-center px-4 py-3 text-sm font-medium rounded-xl hover:bg-slate-800 hover:text-white transition-all text-left"
+                                         >
+                                             <span class="mr-3 opacity-40">"•"</span>
+                                             {name.to_string()}
+                                         </button>
+                                     }
+
                                 }).collect_view()
                         }}
                     </div>
