@@ -1,115 +1,82 @@
-# Leptos Starter Template
+# 🚀 Leptos Tailwind Boilerplate
 
-## Preface
+A modern, high-performance frontend boilerplate built with **Leptos 0.7**, **Tailwind CSS v4**, and **Trunk**. This project is designed as a foundation for building scalable, reactive web applications with a strong focus on reusable UI primitives and custom hooks.
 
-This template is borrowed from [Leptos's Examples](https://github.com/leptos-rs/leptos/tree/main/examples/tailwind), their example directory relies on having the entire Leptos repository locally available. Instead, this repository is meant to serve as a standalone template you can use to get started using Leptos with Tailwind.
+## 🛠 Tech Stack
 
-Currently this project is set up to run a full-stack leptos app, running leptos version 0.2.5, and rust nightly.
-All the original instructions are reproduced below.
+- **Framework**: [Leptos 0.7](https://leptos.dev/) (Client-Side Rendering)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **Bundler**: [Trunk](https://trunkrs.dev/)
+- **Runtime/Tooling**: [Bun](https://bun.sh/)
+- **Language**: Rust (Nightly recommended)
 
-## Overview
+## 🚀 Getting Started
 
-This is a template demonstrating how to integrate [TailwindCSS](https://tailwindcss.com/) with the [Leptos](https://github.com/leptos-rs/leptos) web framework and the [cargo-leptos](https://github.com/akesson/cargo-leptos) tool.
+### Prerequisites
 
-If you don't have `cargo-leptos` installed you can install it with
+1. **Rust Nightly**:
+   ```bash
+   rustup toolchain install nightly
+   rustup default nightly
+   rustup target add wasm32-unknown-unknown
+   ```
 
-`cargo install --locked cargo-leptos`
+2. **Trunk**:
+   ```bash
+   cargo install trunk
+   ```
 
-Then run
+3. **Bun**:
+   Install via [bun.sh](https://bun.sh)
 
-`npx tailwindcss -i ./input.css -o ./style/output.css --watch`
+### Installation & Development
 
-and
+1. **Clone the repository**:
+   ```bash
+   git clone <repo-url>
+   cd rigortemplate-rust-leptos-tailwind-02
+   ```
 
-`cargo leptos watch`
+2. **Install JS dependencies**:
+   ```bash
+   bun install
+   ```
 
-in this directory.
+3. **Run the development server**:
+   ```bash
+   bun run dev
+   ```
+   This command concurrently runs the Tailwind CSS watcher and the Trunk development server.
 
-Open browser on [http://localhost:3000/](http://localhost:3000/)
+4. **Open the app**:
+   Navigate to [http://localhost:8080](http://localhost:8080) in your browser.
 
-You can begin editing your app at `src/app.rs`.
+## 🏗 Project Architecture
 
-## Installing Tailwind
+The project is organized into a clean separation between application logic and reusable primitives:
 
-You can install Tailwind using `npm`:
+### `src/stdlib/` (The Foundation)
+The standard library contains framework-agnostic utilities:
+- **`ui/`**: A collection of atomic UI components (Button, Badge, Modal, etc.) and a `registry` for the catalog.
+- **`hooks/`**: A rich set of reusable reactive hooks (e.g., `use_local_storage`, `use_window_size`, `use_debounce`).
+- **`services/`**: API clients and error handling logic.
 
-```bash
-npm install -D tailwindcss
-```
+### `src/components/` (The Application)
+- **`layout/`**: Global shell components (Header, Sidebar, MainLayout).
+- **`views/`**: Page-level components.
+- **`shared/`**: Application-specific shared components.
 
-If you'd rather not use `npm`, you can install the Tailwind binary [here](https://github.com/tailwindlabs/tailwindcss/releases).
+## 📚 Component & Hooks Catalog
 
-## Setting up with VS Code and Additional Tools
+This project includes a built-in interactive documentation system:
+- **Component Catalog**: Browse all UI primitives, see them in action, and copy the full Rust source code.
+- **Hooks Gallery**: Explore the available reactive hooks with usage examples and descriptions.
 
-If you're using VS Code, add the following to your `settings.json`
+## 🛠 Configuration
 
-```json
-  "emmet.includeLanguages": {
-    "rust": "html",
-    "*.rs": "html"
-  },
-  "tailwindCSS.includeLanguages": {
-      "rust": "html",
-      "*.rs": "html"
-  },
-  "files.associations": {
-      "*.rs": "rust"
-  },
-  "editor.quickSuggestions": {
-    "other": "on",
-    "comments": "on",
-    "strings": true
-  },
-  "css.validate": false,
-```
+- **Tailwind**: Configured in `tailwind.config.js`.
+- **Builds**: Managed via `package.json` scripts and `Trunk.toml`.
+- **Routing**: Currently uses a signal-based manual router in `app.rs` and `main_layout.rs`.
 
-Install [Tailwind CSS Intellisense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss).
-
-    Install "VS Browser" extension, a browser at the right window.
-    Allow vscode Ports forward: 3000, 3001.
-
-## Notes about Tooling
-
-By default, `cargo-leptos` uses `nightly` Rust, `cargo-generate`, and `sass`. If you run into any trouble, you may need to install one or more of these tools.
-
-1. `rustup toolchain install nightly --allow-downgrade` - make sure you have Rust nightly
-2. `rustup default nightly` - setup nightly as default, or you can use rust-toolchain file later on
-3. `rustup target add wasm32-unknown-unknown` - add the ability to compile Rust to WebAssembly
-4. `cargo install cargo-generate` - install `cargo-generate` binary (should be installed automatically in future)
-5. `npm install -g sass` - install `dart-sass` (should be optional in future
-
-## Alternatives to cargo-leptos
-
-This crate can be run without `cargo-leptos`, using `wasm-pack` and `cargo`. To do so, you'll need to install some other tools.
-0. `cargo install wasm-pack`
-1. Edit the `[package.metadata.leptos]` section and set `site-root` to `"."`. You'll also want to change the path of the `<StyleSheet / >` component in the root component to point towards the CSS file in the root. This tells leptos that the WASM/JS files generated by wasm-pack are available at `./pkg` and that the CSS files are no longer processed by cargo-leptos. Building to alternative folders is not supported at this time. You'll also want to edit the call to `get_configuration()` to pass in `Some(Cargo.toml)`, so that Leptos will read the settings instead of cargo-leptos. If you do so, your file/folder names cannot include dashes.
-
-### Server Side Rendering With Hydration
-
-To run it as a server side app with hydration, first you should run
-
-```bash
-wasm-pack build --target=web --no-default-features --features=hydrate
-```
-
-to generate the WebAssembly to hydrate the HTML delivered from the server.
-
-Then run the server with `cargo run` to serve the server side rendered HTML and the WASM bundle for hydration.
-
-```bash
-cargo run --no-default-features --features=ssr
-```
-
-> Note that if your hydration code changes, you will have to rerun the wasm-pack command above before running
-> `cargo run`
-
-### Client Side Rendering
-
-You'll need to install trunk to client side render this bundle.
-
-1. `cargo install trunk`
-   Then the site can be served with `trunk serve --open`
-
-## Attribution
-
-Many thanks to GreatGreg for putting together this guide. You can find the original, with added details, [here](https://github.com/leptos-rs/leptos/discussions/125).
+## 📝 License
+MIT
