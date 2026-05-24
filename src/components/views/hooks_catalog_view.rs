@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use crate::stdlib::ui::CodeBlock;
+use crate::shared::code_block::CodeBlock;
 
 struct HookDemo {
     name: &'static str,

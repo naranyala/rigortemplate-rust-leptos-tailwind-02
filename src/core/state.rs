@@ -50,3 +50,37 @@ pub fn provide_global_state() {
 pub fn use_global_state() -> GlobalState {
     use_context::<GlobalState>().expect("GlobalState not provided in context")
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_global_state_initialization() {
+        let state = GlobalState::new();
+        assert_eq!(state.user_name.get(), "Guest");
+        assert_eq!(state.is_authenticated.get(), false);
+        assert!(state.notifications.get().is_empty());
+    }
+
+    #[test]
+    fn test_add_notification() {
+        let state = GlobalState::new();
+        state.add_notification("Test message".to_string(), NotificationType::Info);
+        
+        let notifications = state.notifications.get();
+        assert_eq!(notifications.len(), 1);
+        assert_eq!(notifications[0].message, "Test message");
+        assert!(matches!(notifications[0].type_, NotificationType::Info));
+    }
+
+    #[test]
+    fn test_state_updates() {
+        let state = GlobalState::new();
+        state.user_name.set("Alice".to_string());
+        state.is_authenticated.set(true);
+        
+        assert_eq!(state.user_name.get(), "Alice");
+        assert_eq!(state.is_authenticated.get(), true);
+    }
+}

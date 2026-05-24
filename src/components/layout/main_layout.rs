@@ -1,10 +1,9 @@
 use leptos::prelude::*;
 use crate::components::layout::{Header, Sidebar};
 
-use crate::components::views::*;
-use crate::app::AppRoute;
-use crate::stdlib::hooks::toasts::use_toasts;
-use crate::stdlib::ui::Toast;
+use crate::shared::toasts::use_toasts;
+use crate::shared::toast::Toast;
+
 
 #[component]
 pub fn MainLayout(children: Children) -> impl IntoView {

@@ -3,7 +3,8 @@ use wasm_bindgen::prelude::*;
 
 mod app;
 mod components;
-mod stdlib;
+pub mod core;
+pub mod shared;
 
 use crate::app::App;
 

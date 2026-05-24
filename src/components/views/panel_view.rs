@@ -1,5 +1,6 @@
 use leptos::prelude::*;
-use crate::stdlib::ui::*;
+use crate::shared::panel::SlidingPanel;
+use crate::shared::code_block::CodeBlock;
 
 #[component]
 pub fn PanelView() -> impl IntoView {

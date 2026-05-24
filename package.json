@@ -1,11 +1,10 @@
 {
-  "name": "leptos-tailwind",
-  "version": "0.1.0",
   "scripts": {
-    "tailwind:build": "./node_modules/.bin/tailwindcss -i ./input.css -o ./style/output.css",
-    "tailwind:watch": "./node_modules/.bin/tailwindcss -i ./input.css -o ./style/output.css --watch",
+    "tailwind:build": "./node_modules/.bin/tailwindcss -i ./input.css -o ./public/output.css",
+    "tailwind:watch": "./node_modules/.bin/tailwindcss -i ./input.css -o ./public/output.css --watch",
     "dev": "PORT=$(./scripts/find-port.sh) && bun concurrently \"bun run tailwind:watch\" \"trunk serve --port $PORT\"",
-    "build": "bun run tailwind:build && trunk build --release"
+    "build": "bun run tailwind:build && trunk build --release",
+    "docs": "cargo doc --no-deps"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",

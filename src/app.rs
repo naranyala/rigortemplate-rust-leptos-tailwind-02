@@ -2,10 +2,11 @@ use leptos::prelude::*;
 use leptos_meta::*;
 
 use crate::components::*;
-use crate::components::views::*;
-use crate::stdlib::state::provide_global_state;
-use crate::stdlib::hooks::theme::provide_theme_context;
-use crate::stdlib::services::provider::ServiceProvider;
+use crate::core::state::provide_global_state;
+use crate::shared::theme::provide_theme_context;
+use crate::core::provider::ServiceProvider;
+
+
 
 #[derive(Clone, Copy, PartialEq, Debug)]
 pub enum AppRoute {

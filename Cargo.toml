@@ -30,9 +30,13 @@ gloo-storage = "0.4.0"
 thiserror = "2.0.18"
 js-sys = "0.3.99"
 regex = "1.12.3"
+async-trait = "0.1.89"
+tokio = { version = "1.52.3", features = ["macros", "rt-multi-thread"] }
 
 [dev-dependencies]
+mockito = "1.7.2"
 wasm-bindgen-test = "0.3"
+proptest = "1.4"
 
 [features]
 default = ["csr"]

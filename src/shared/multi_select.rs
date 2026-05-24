@@ -1,5 +1,11 @@
 use leptos::prelude::*;
 
+/// A multi-select dropdown component that allows selecting multiple options from a list.
+/// 
+/// # Arguments
+/// * `options` - A vector of (value, label) tuples.
+/// * `selected` - An `RwSignal` containing the currently selected values.
+/// * `placeholder` - The text to display when no options are selected.
 #[component]
 pub fn MultiSelect(
     options: Vec<(String, String)>, // (value, label)

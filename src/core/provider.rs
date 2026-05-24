@@ -1,6 +1,6 @@
 use leptos::prelude::*;
 use std::sync::Arc;
-use crate::stdlib::services::api::ApiClient;
+use crate::core::api::ApiClient;
 
 /// ServiceProvider handles the initialization and provision of global services.
 pub struct ServiceProvider;
