@@ -2,7 +2,7 @@ use leptos::prelude::*;
 use crate::shared::theme::{use_theme_context, Theme};
 
 #[component]
-pub fn Header() -> impl IntoView {
+pub fn Header(set_is_open: WriteSignal<bool>) -> impl IntoView {
     let theme_ctx = use_theme_context();
     let theme = theme_ctx.theme;
     let set_theme = theme_ctx.set_theme;
@@ -20,7 +20,10 @@ pub fn Header() -> impl IntoView {
     view! {
         <header class="bg-white dark:bg-surface-900 border-b border-surface-200 dark:border-surface-800 h-16 flex items-center justify-between px-4 sm:px-6 lg:px-8 sticky top-0 z-10 transition-colors duration-300">
             <div class="flex items-center">
-                <button class="md:hidden p-2 mr-2 text-surface-600 dark:text-surface-400">
+                <button 
+                    on:click=move |_| set_is_open.set(true)
+                    class="md:hidden p-3 mr-2 text-2xl text-surface-600 dark:text-surface-400 hover:bg-surface-100 dark:hover:bg-surface-800 rounded-xl transition-colors"
+                >
                     "☰"
                 </button>
                 <h1 class="text-lg font-semibold text-surface-800 dark:text-surface-100">"Overview"</h1>

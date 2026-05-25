@@ -54,3 +54,21 @@ pub fn provide_theme_context() {
 pub fn use_theme_context() -> ThemeContext {
     use_context::<ThemeContext>().expect("ThemeContext not provided")
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_theme_as_str() {
+        assert_eq!(Theme::Light.as_str(), "light");
+        assert_eq!(Theme::Dark.as_str(), "dark");
+    }
+
+    #[test]
+    fn test_theme_equality() {
+        assert_eq!(Theme::Light, Theme::Light);
+        assert_eq!(Theme::Dark, Theme::Dark);
+        assert_ne!(Theme::Light, Theme::Dark);
+    }
+}

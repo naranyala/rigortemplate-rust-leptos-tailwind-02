@@ -29,3 +29,38 @@ impl AppError {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_to_user_message_network() {
+        let err = AppError::Network("timeout".to_string());
+        assert_eq!(err.to_user_message(), "Please check your internet connection and try again.");
+    }
+
+    #[test]
+    fn test_to_user_message_validation() {
+        let err = AppError::Validation("Invalid email".to_string());
+        assert_eq!(err.to_user_message(), "Invalid email");
+    }
+
+    #[test]
+    fn test_to_user_message_internal() {
+        let err = AppError::Internal("db crash".to_string());
+        assert_eq!(err.to_user_message(), "Something went wrong on our end. Please try again later.");
+    }
+
+    #[test]
+    fn test_to_user_message_serialization() {
+        let err = AppError::Serialization("bad json".to_string());
+        assert_eq!(err.to_user_message(), "We encountered an issue processing the data.");
+    }
+
+    #[test]
+    fn test_to_user_message_unknown() {
+        let err = AppError::Unknown;
+        assert_eq!(err.to_user_message(), "An unexpected error occurred.");
+    }
+}

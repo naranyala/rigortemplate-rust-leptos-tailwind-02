@@ -40,7 +40,7 @@ pub(crate) fn highlight_code(code: &str) -> String {
             }
             let text = escape_html(&code[start..i]);
             result.push_str(&format!(
-                "<span class=\"text-surface-500 italic\">{}</span>",
+                "<span class=\"text-slate-500 italic\">{}</span>",
                 text
             ));
             continue;
@@ -118,7 +118,7 @@ pub(crate) fn highlight_code(code: &str) -> String {
             }
             let text = escape_html(&code[start..i]);
             result.push_str(&format!(
-                "<span class=\"text-amber-400\">{}</span>",
+                "<span class=\"text-orange-300\">{}</span>",
                 text
             ));
             continue;
@@ -157,7 +157,7 @@ pub(crate) fn highlight_code(code: &str) -> String {
             // PascalCase -> component/type name
             if is_pascal_case(word) {
                 result.push_str(&format!(
-                    "<span class=\"text-sky-300\">{}</span>",
+                    "<span class=\"text-yellow-200\">{}</span>",
                     text
                 ));
                 continue;
@@ -166,7 +166,7 @@ pub(crate) fn highlight_code(code: &str) -> String {
             // Function call: name(
             if i < len && bytes[i] == b'(' {
                 result.push_str(&format!(
-                    "<span class=\"text-cyan-400\">{}</span>",
+                    "<span class=\"text-blue-400\">{}</span>",
                     text
                 ));
                 continue;
@@ -178,21 +178,21 @@ pub(crate) fn highlight_code(code: &str) -> String {
 
         // Arrow: ->
         if c == b'-' && i + 1 < len && bytes[i + 1] == b'>' {
-            result.push_str("<span class=\"text-surface-400\">-&gt;</span>");
+            result.push_str("<span class=\"text-slate-400\">-&gt;</span>");
             i += 2;
             continue;
         }
 
         // Fat arrow: =>
         if c == b'=' && i + 1 < len && bytes[i + 1] == b'>' {
-            result.push_str("<span class=\"text-surface-400\">=&gt;</span>");
+            result.push_str("<span class=\"text-slate-400\">=&gt;</span>");
             i += 2;
             continue;
         }
 
         // Path separator: ::
         if c == b':' && i + 1 < len && bytes[i + 1] == b':' {
-            result.push_str("<span class=\"text-surface-400\">::</span>");
+            result.push_str("<span class=\"text-slate-400\">::</span>");
             i += 2;
             continue;
         }
@@ -216,7 +216,7 @@ pub(crate) fn highlight_code(code: &str) -> String {
             }
             let text = escape_html(&code[start..i]);
             result.push_str(&format!(
-                "<span class=\"text-orange-400\">{}</span>",
+                "<span class=\"text-red-400\">{}</span>",
                 text
             ));
             continue;
@@ -231,9 +231,21 @@ pub(crate) fn highlight_code(code: &str) -> String {
 
 #[component]
 pub fn CodeBlock(code: &'static str) -> impl IntoView {
-    let highlighted = highlight_code(code);
+    let is_empty = code.trim().is_empty();
+    let highlighted = if is_empty {
+        "<span class=\"text-red-500 font-bold\">// ⚠️ MISSING CODE: Please provide a code example for this demo.</span>".to_string()
+    } else {
+        highlight_code(code)
+    };
+
+    let container_class = if is_empty {
+        "text-sm font-mono overflow-x-auto p-6 bg-[#282c34] rounded-xl leading-relaxed border-2 border-red-500 text-slate-300"
+    } else {
+        "text-sm font-mono overflow-x-auto p-6 bg-[#282c34] rounded-xl leading-relaxed border border-slate-800 text-slate-300"
+    };
+
     view! {
-        <pre class="text-sm font-mono overflow-x-auto p-6 bg-surface-950 rounded-xl leading-relaxed border border-surface-800">
+        <pre class=container_class>
             <code inner_html=highlighted />
         </pre>
     }
@@ -268,27 +280,27 @@ mod tests {
     fn test_highlight_comments() {
         let code = "// this is a comment";
         let highlighted = highlight_code(code);
-        assert!(highlighted.contains("text-surface-500 italic"));
+        assert!(highlighted.contains("text-slate-500 italic"));
     }
 
     #[test]
     fn test_highlight_attributes() {
         let code = "#[component]";
         let highlighted = highlight_code(code);
-        assert!(highlighted.contains("text-orange-400"));
+        assert!(highlighted.contains("text-red-400"));
     }
 
     #[test]
     fn test_highlight_operators() {
         let code = "fn foo() -> i32 { 1 => 2 }";
         let highlighted = highlight_code(code);
-        assert!(highlighted.contains("text-surface-400"));
+        assert!(highlighted.contains("text-slate-400"));
     }
 
     #[test]
     fn test_highlight_pascal_case() {
         let code = "let x = Button {};";
         let highlighted = highlight_code(code);
-        assert!(highlighted.contains("text-sky-300"));
+        assert!(highlighted.contains("text-yellow-200"));
     }
 }

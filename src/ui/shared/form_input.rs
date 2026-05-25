@@ -118,5 +118,41 @@ mod tests {
                 assert_eq!(validate_input(&val, &rules), Some("Invalid email".to_string()));
             }
         }
+
+        #[test]
+        fn test_validate_input_multiple_rules(val in ".*") {
+            let rules = vec![
+                ValidationRule {
+                    pattern: Regex::new(r"^.+$").unwrap(),
+                    message: "Cannot be empty".to_string(),
+                },
+                ValidationRule {
+                    pattern: Regex::new(r"^\d+$").unwrap(),
+                    message: "Must be numeric".to_string(),
+                },
+            ];
+
+            if val.is_empty() {
+                assert_eq!(validate_input(&val, &rules), Some("Cannot be empty".to_string()));
+            } else if !val.chars().all(|c| c.is_ascii_digit()) {
+                assert_eq!(validate_input(&val, &rules), Some("Must be numeric".to_string()));
+            } else {
+                assert_eq!(validate_input(&val, &rules), None);
+            }
+        }
+
+        #[test]
+        fn test_validate_input_case_sensitivity(val in ".*") {
+            let rules = vec![ValidationRule {
+                pattern: Regex::new(r"^[A-Z]+$").unwrap(),
+                message: "Uppercase only".to_string(),
+            }];
+
+            if val.chars().all(|c| c.is_ascii_uppercase()) && !val.is_empty() {
+                assert_eq!(validate_input(&val, &rules), None);
+            } else {
+                assert_eq!(validate_input(&val, &rules), Some("Uppercase only".to_string()));
+            }
+        }
     }
 }
