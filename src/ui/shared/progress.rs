@@ -11,9 +11,9 @@ pub fn Progress(
     });
 
     view! {
-        <div class=move || format!("w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5 {}", class.clone().unwrap_or_default())>
+        <div class=move || format!("w-full bg-surface-200 dark:bg-surface-700 rounded-full h-2.5 {}", class.clone().unwrap_or_default())>
             <div 
-                class="bg-blue-600 h-2.5 rounded-full transition-all duration-300 ease-out"
+                class="bg-accent-600 h-2.5 rounded-full transition-all duration-300 ease-out"
                 style=move || format!("width: {}%", percentage.get())
             ></div>
         </div>

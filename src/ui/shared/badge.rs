@@ -1,4 +1,3 @@
-use leptos::prelude::{ElementChild, ClassAttribute};
 use leptos::prelude::*;
 
 #[component]
@@ -6,8 +5,8 @@ pub fn Badge(text: &'static str, color: &'static str) -> impl IntoView {
     let color_style = match color {
         "green" => "bg-green-100 text-green-700",
         "red" => "bg-red-100 text-red-700",
-        "blue" => "bg-blue-100 text-blue-700",
-        _ => "bg-slate-100 text-slate-700",
+        "blue" => "bg-accent-100 text-accent-700",
+        _ => "bg-surface-100 text-surface-700",
     };
 
     view! {

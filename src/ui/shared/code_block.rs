@@ -40,7 +40,7 @@ pub(crate) fn highlight_code(code: &str) -> String {
             }
             let text = escape_html(&code[start..i]);
             result.push_str(&format!(
-                "<span class=\"text-slate-500 italic\">{}</span>",
+                "<span class=\"text-surface-500 italic\">{}</span>",
                 text
             ));
             continue;
@@ -178,21 +178,21 @@ pub(crate) fn highlight_code(code: &str) -> String {
 
         // Arrow: ->
         if c == b'-' && i + 1 < len && bytes[i + 1] == b'>' {
-            result.push_str("<span class=\"text-slate-400\">-&gt;</span>");
+            result.push_str("<span class=\"text-surface-400\">-&gt;</span>");
             i += 2;
             continue;
         }
 
         // Fat arrow: =>
         if c == b'=' && i + 1 < len && bytes[i + 1] == b'>' {
-            result.push_str("<span class=\"text-slate-400\">=&gt;</span>");
+            result.push_str("<span class=\"text-surface-400\">=&gt;</span>");
             i += 2;
             continue;
         }
 
         // Path separator: ::
         if c == b':' && i + 1 < len && bytes[i + 1] == b':' {
-            result.push_str("<span class=\"text-slate-400\">::</span>");
+            result.push_str("<span class=\"text-surface-400\">::</span>");
             i += 2;
             continue;
         }
@@ -233,7 +233,7 @@ pub(crate) fn highlight_code(code: &str) -> String {
 pub fn CodeBlock(code: &'static str) -> impl IntoView {
     let highlighted = highlight_code(code);
     view! {
-        <pre class="text-sm font-mono overflow-x-auto p-6 bg-slate-950 rounded-xl leading-relaxed border border-slate-800">
+        <pre class="text-sm font-mono overflow-x-auto p-6 bg-surface-950 rounded-xl leading-relaxed border border-surface-800">
             <code inner_html=highlighted />
         </pre>
     }
@@ -268,7 +268,7 @@ mod tests {
     fn test_highlight_comments() {
         let code = "// this is a comment";
         let highlighted = highlight_code(code);
-        assert!(highlighted.contains("text-slate-500 italic"));
+        assert!(highlighted.contains("text-surface-500 italic"));
     }
 
     #[test]
@@ -282,7 +282,7 @@ mod tests {
     fn test_highlight_operators() {
         let code = "fn foo() -> i32 { 1 => 2 }";
         let highlighted = highlight_code(code);
-        assert!(highlighted.contains("text-slate-400"));
+        assert!(highlighted.contains("text-surface-400"));
     }
 
     #[test]

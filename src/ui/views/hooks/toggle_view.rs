@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use crate::ui::shared::code_block::CodeBlock;
+use crate::ui::shared::DemoPage;
 use crate::hooks::use_toggle;
 
 #[component]
@@ -7,18 +7,18 @@ pub fn ToggleView() -> impl IntoView {
     let (is_open, set_open) = use_toggle(false);
 
     view! {
-        <div class="p-6 lg:p-12 max-w-4xl mx-auto space-y-12">
-            <div class="space-y-4">
-                <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">"use_toggle"</h2>
-                <p class="text-lg text-slate-500 leading-relaxed">
-                    "A simple hook to manage a boolean state toggle, ideal for modals, accordions, or sidebars."
-                </p>
-            </div>
+        <DemoPage
+            title="use_toggle"
+            description="A simple hook to manage a boolean state toggle, ideal for modals, accordions, or sidebars."
+            code=r#"let (is_open, set_open) = use_toggle(false);
 
+// To toggle the state:
+set_open.update(|v| *v = !*v);"#
+        >
             <div class="flex items-center justify-center py-12">
-                <button 
+                <button
                     on:click=move |_| set_open.update(|v| *v = !*v)
-                    class="px-8 py-4 bg-indigo-600 text-white rounded-2xl font-bold shadow-xl shadow-indigo-200 hover:bg-indigo-700 transition-all hover:scale-105 active:scale-95"
+                    class="px-8 py-4 bg-accent-600 text-white rounded-2xl font-bold hover:bg-accent-700 transition-all hover:scale-105 active:scale-95"
                 >
                     {move || if is_open.get() { "Hide Content" } else { "Show Content" }}
                 </button>
@@ -35,16 +35,6 @@ pub fn ToggleView() -> impl IntoView {
                     view! { <div class="h-0"></div> }.into_any()
                 }}
             </div>
-
-            <div class="bg-slate-900 rounded-3xl p-6 shadow-xl overflow-hidden">
-                <div class="flex items-center justify-between mb-4">
-                    <span class="text-xs font-mono text-slate-400 uppercase tracking-widest">"Usage"</span>
-                </div>
-                <CodeBlock code=r#"let (is_open, set_open) = use_toggle(false);
-
-// To toggle the state:
-set_open.update(|v| *v = !*v);"# />
-            </div>
-        </div>
+        </DemoPage>
     }
 }

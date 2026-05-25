@@ -37,14 +37,14 @@ where
     });
 
     view! {
-        <div class="overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700">
-            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700 bg-white dark:bg-gray-900 text-sm text-left">
-                <thead class="bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300 font-medium">
+        <div class="overflow-x-auto rounded-lg border border-surface-200 dark:border-surface-700">
+            <table class="min-w-full divide-y divide-surface-200 dark:divide-surface-700 bg-white dark:bg-surface-900 text-sm text-left">
+                <thead class="bg-surface-50 dark:bg-surface-800 text-surface-700 dark:text-surface-300 font-medium">
                     <tr>
                 {columns.iter().enumerate().map(|(i, col)| {
                     view! {
                         <th 
-                            class="px-4 py-3 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                            class="px-4 py-3 cursor-pointer hover:bg-surface-100 dark:hover:bg-surface-700 transition-colors"
                             on:click=move |_| {
                                 if sort_col.get() == Some(i) {
                                     set_sort_asc.update(|v| *v = !*v);
@@ -70,14 +70,14 @@ where
 
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                <tbody class="divide-y divide-surface-200 dark:divide-surface-700">
                     {move || {
                         sorted_data.get().into_iter().map(|row| {
                             view! {
-                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                                <tr class="hover:bg-surface-50 dark:hover:bg-surface-800 transition-colors">
                                     {columns.iter().map(|col| {
                                         view! {
-                                            <td class="px-4 py-3 text-gray-600 dark:text-gray-400">
+                                            <td class="px-4 py-3 text-surface-600 dark:text-surface-400">
                                                 {(col.accessor)(&row)}
                                             </td>
                                         }

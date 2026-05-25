@@ -1,4 +1,3 @@
-use leptos::prelude::{ElementChild, ClassAttribute};
 use leptos::prelude::*;
 
 #[component]
@@ -9,7 +8,7 @@ pub fn Toast(
     let color_class = match toast_type.as_str() {
         "success" => "bg-green-500",
         "error" => "bg-red-500",
-        _ => "bg-indigo-500",
+        _ => "bg-accent-500",
     };
 
     view! {

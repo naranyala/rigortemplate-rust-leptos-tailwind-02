@@ -7,7 +7,7 @@ pub fn AccordionView() -> impl IntoView {
     view! {
         <div class="min-h-screen p-8 lg:p-16 max-w-3xl mx-auto space-y-12">
             <div class="relative">
-                <div class="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-[2rem] blur opacity-20"></div>
+                <div class="absolute -inset-1 bg-gradient-to-r from-accent-500 to-purple-600 rounded-[2rem] blur opacity-20"></div>
                 <div class="relative space-y-6">
                     <Accordion>
                         <AccordionItem title="The Architecture".to_string()>
@@ -29,9 +29,9 @@ pub fn AccordionView() -> impl IntoView {
                             </p>
                         </AccordionItem>
                     </Accordion>
-                    <div class="bg-slate-900 rounded-3xl p-6 shadow-xl overflow-hidden">
+                    <div class="bg-surface-900 rounded-3xl p-6 shadow-xl overflow-hidden">
                         <div class="flex items-center justify-between mb-4">
-                            <span class="text-xs font-mono text-slate-400 uppercase tracking-widest">"Source Code"</span>
+                            <span class="text-xs font-mono text-surface-400 uppercase tracking-widest">"Source Code"</span>
                         </div>
                         <CodeBlock code=r#"view! {
     <Accordion>

@@ -131,12 +131,12 @@ mod tests {
         
         let result = cn(&[
             Some("px-4 py-2"),
-            if is_active { Some("bg-indigo-500 text-white") } else { None },
+            if is_active { Some("bg-accent-500 text-white") } else { None },
             if is_disabled { Some("opacity-50 cursor-not-allowed") } else { None },
             Some("px-6"), 
         ]);
         
-        assert_eq!(result, "px-6 py-2 bg-indigo-500 text-white");
+        assert_eq!(result, "px-6 py-2 bg-accent-500 text-white");
     }
 
     #[test]
@@ -171,8 +171,8 @@ mod tests {
             "dark:hover:bg-blue-500"
         );
         assert_eq!(
-            merge("md:dark:bg-slate-800 md:dark:bg-slate-900"),
-            "md:dark:bg-slate-900"
+            merge("md:dark:bg-surface-800 md:dark:bg-surface-900"),
+            "md:dark:bg-surface-900"
         );
     }
 

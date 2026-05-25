@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use wasm_bindgen::prelude::*;
+use wasm_bindgen::prelude::wasm_bindgen;
 
 mod app;
 pub mod core;

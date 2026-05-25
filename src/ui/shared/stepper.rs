@@ -26,9 +26,9 @@ pub fn Stepper(
                             <div 
                                 class=move || format!(
                                     "w-10 h-10 rounded-full flex items-center justify-center font-bold transition-colors duration-300 z-10 {}",
-                                    if is_active() { "bg-blue-600 text-white" } 
+                                    if is_active() { "bg-accent-600 text-white" } 
                                     else if is_completed() { "bg-green-500 text-white" } 
-                                    else { "bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400" }
+                                    else { "bg-surface-200 dark:bg-surface-700 text-surface-500 dark:text-surface-400" }
                                 )
                             >
                                 {move || if is_completed() { "✓".to_string() } else { i.to_string() }}
@@ -40,9 +40,9 @@ pub fn Stepper(
                         </div>
                             {if i < steps_len - 1 {
                                 view! {
-                                    <div class="flex-1 h-1 mx-4 bg-gray-200 dark:bg-gray-700 relative">
+                                    <div class="flex-1 h-1 mx-4 bg-surface-200 dark:bg-surface-700 relative">
                                         <div 
-                                            class="absolute top-0 left-0 h-full bg-blue-600 transition-all duration-300"
+                                            class="absolute top-0 left-0 h-full bg-accent-600 transition-all duration-300"
                                             style=move || format!("width: {}%", if is_completed() { 100 } else { 0 })
                                         ></div>
                                     </div>

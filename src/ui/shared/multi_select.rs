@@ -30,19 +30,19 @@ pub fn MultiSelect(
     view! {
         <div class="relative w-full">
             <div 
-                class="px-3 py-2 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-md cursor-pointer flex justify-between items-center"
+                class="px-3 py-2 bg-white dark:bg-surface-900 border border-surface-300 dark:border-surface-700 rounded-md cursor-pointer flex justify-between items-center"
                 on:click=move |_| set_is_open.update(|v| *v = !*v)
             >
                 <div class="flex flex-wrap gap-1">
                     {move || {
                         let options_inner = options_for_top.clone();
                         if selected.get().is_empty() {
-                            view! { <span class="text-gray-400">{placeholder.clone()}</span> }.into_any()
+                            view! { <span class="text-surface-400">{placeholder.clone()}</span> }.into_any()
                         } else {
                             let items = selected.get().into_iter().map(|val| {
                                 let label = options_inner.iter().find(|(v, _)| v == &val).map(|(_, l)| l.clone()).unwrap_or(val.clone());
                                 view! {
-                                    <span class="px-2 py-0.5 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-200 text-xs rounded-full">
+                                    <span class="px-2 py-0.5 bg-accent-100 dark:bg-accent-900 text-accent-700 dark:text-accent-200 text-xs rounded-full">
                                         {label}
                                     </span>
                                 }.into_any()
@@ -51,20 +51,20 @@ pub fn MultiSelect(
                         }
                     }}
                 </div>
-                <div class="text-gray-400 text-xs">"▼"</div>
+                <div class="text-surface-400 text-xs">"▼"</div>
             </div>
             
             {move || {
                 let options_inner = options_for_bottom.clone();
                 if is_open.get() {
                     view! {
-                        <div class="absolute z-50 w-full mt-1 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-md shadow-lg max-h-60 overflow-auto">
+                        <div class="absolute z-50 w-full mt-1 bg-white dark:bg-surface-900 border border-surface-300 dark:border-surface-700 rounded-md shadow-lg max-h-60 overflow-auto">
                             {options_inner.iter().map(|(val, label)| {
                                 let val_clone = val.clone();
                                 let label_clone = label.clone();
                                 view! {
                                     <div 
-                                        class="px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer flex items-center gap-2"
+                                        class="px-3 py-2 hover:bg-surface-100 dark:hover:bg-surface-800 cursor-pointer flex items-center gap-2"
                                         on:click=move |_| {
                                             let v = val_clone.clone();
                                             toggle_selection(v)
@@ -76,9 +76,9 @@ pub fn MultiSelect(
                                                 let v = val_clone.clone();
                                                 move || selected.get().contains(&v)
                                             }
-                                            class="rounded border-gray-300 dark:border-gray-700"
+                                            class="rounded border-surface-300 dark:border-surface-700"
                                         />
-                                        <span class="text-sm text-gray-700 dark:text-gray-300">{label_clone}</span>
+                                        <span class="text-sm text-surface-700 dark:text-surface-300">{label_clone}</span>
                                     </div>
                                 }.into_any()
                             }).collect::<Vec<_>>()}

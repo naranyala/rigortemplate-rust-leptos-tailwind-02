@@ -17,9 +17,9 @@ pub fn Tooltip(
             {move || {
                 if is_visible.get() {
                     view! {
-                        <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 text-xs text-white bg-gray-800 rounded shadow-lg whitespace-nowrap z-50 pointer-events-none animate-in fade-in zoom-in duration-150">
+                        <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 text-xs text-white bg-surface-800 rounded shadow-lg whitespace-nowrap z-50 pointer-events-none animate-in fade-in zoom-in duration-150">
                             {text.clone()}
-                            <div class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-gray-800"></div>
+                            <div class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-surface-800"></div>
                         </div>
                     }.into_any()
                 } else {

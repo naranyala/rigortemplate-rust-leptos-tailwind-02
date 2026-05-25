@@ -4,6 +4,7 @@ pub mod projects_view;
 pub mod settings_view;
 pub mod accordion_view;
 pub mod panel_view;
+pub mod welcome_view;
 pub mod hooks;
 
 pub use analytics_view::AnalyticsView;
@@ -12,5 +13,6 @@ pub use projects_view::ProjectsView;
 pub use settings_view::SettingsView;
 pub use accordion_view::AccordionView;
 pub use panel_view::PanelView;
-pub use hooks::*;
+pub use welcome_view::WelcomeView;
+pub use hooks::{ToggleView, MountedView, ClipboardView};
 

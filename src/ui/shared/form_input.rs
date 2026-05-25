@@ -45,15 +45,15 @@ pub fn FormInput(
 
     view! {
         <div class="flex flex-col gap-1.5 w-full">
-            <label class="text-sm font-medium text-gray-700 dark:text-gray-300">
+            <label class="text-sm font-medium text-surface-700 dark:text-surface-300">
                 {label}
             </label>
             <input 
                 type=input_type
                 placeholder=placeholder
                 class=move || format!(
-                    "px-3 py-2 bg-white dark:bg-gray-900 border rounded-md outline-none transition-colors focus:ring-2 focus:ring-blue-500 {}",
-                    if error.get().is_some() { "border-red-500 focus:ring-red-500" } else { "border-gray-300 dark:border-gray-700" }
+                    "px-3 py-2 bg-white dark:bg-surface-900 border rounded-md outline-none transition-colors focus:ring-2 focus:ring-accent-500 {}",
+                    if error.get().is_some() { "border-red-500 focus:ring-red-500" } else { "border-surface-300 dark:border-surface-700" }
                 )
                 on:input=move |ev| {
                     value.set(event_target_value(&ev));
