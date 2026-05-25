@@ -4,30 +4,38 @@ This document details the primary architectural patterns implemented in the boil
 
 ## Dependency Injection (Service Provider Pattern)
 
-To prevent "prop-drilling" and manage long-lived external dependencies (like API clients), the project uses a Service Provider pattern based on Leptos's context system.
+To prevent prop-drilling and manage long-lived external dependencies (like API clients), the project uses a context-based service initialization pattern.
 
 ### Implementation Details
-- **`ServiceProvider`**: A central registry located in `src/stdlib/services/provider.rs`. It is responsible for initializing services (e.g., creating an `Arc<ApiClient>`) and providing them to the component tree.
+- **`provide_services()`**: A function located in `src/core/provider.rs`. It is responsible for initializing services (e.g., creating an `Arc<ApiClient>`) and providing them to the component tree.
 - **Context Injection**: Services are injected using `provide_context` at the root of the application (`src/app.rs`).
 - **Consumption**: Components access services using type-safe helper functions (e.g., `use_api()`), which internally call `use_context`.
 
 ### Advantages
-- **Testability**: By using a trait-based approach or providing different implementations via context, services can be easily swapped with mocks during testing.
+- **Testability**: By providing different implementations via context, services can be easily swapped with mocks during testing.
 - **Decoupling**: Components depend on a service interface rather than a concrete implementation.
 - **Lifecycle Management**: Services are initialized once at application startup and exist for the lifetime of the application.
 
 ## Global State Management
 
-The project manages application-wide state (e.s. user authentication, global notifications, theme) using a centralized context pattern.
+The project manages application-wide state (user authentication, global notifications, theme) using individual signal contexts.
 
-- **Pattern**: A single `GlobalState` struct is created, containing various `RwSignal` fields.
-- **Provision**: The state is provided via `provide_context` in the `App` component.
-- **Reactivity**: Because state is stored in `RwSignal`s, any component consuming the state will automatically re-render when the state changes.
+- **Pattern**: Each state concern (user name, authentication, notifications) is provided as its own `RwSignal` via context.
+- **Provision**: Signals are provided via `provide_context` in the `App` component through `provide_global_state()`.
+- **Reactivity**: Components subscribe only to the specific signals they need, avoiding unnecessary re-renders.
 
 ## Layout Composition
 
-The project employs a composition-based layout strategy to allow for maximum flexibility.
+The project employs a composition-based layout strategy for maximum flexibility.
 
 - **`MainLayout`**: Acts as a generic shell. Instead of being coupled to specific routes, it accepts `children: Children`.
-- **Routing Decoupling**: The responsibility of deciding *which* view to render is moved up to the `App` component. The `App` component matches the current route and passes the appropriate view as a child to the `MainLayout`.
-- **Flexibility**: This allows for easy creation of different layout types (e.g., `AuthLayout` for login pages, `DashboardLayout` for authenticated users) without duplicating the core structure.
+- **Routing Decoupling**: The `App` component uses `<Routes>` to match URL paths and render the appropriate view inside `MainLayout`.
+- **Flexibility**: This allows for easy creation of different layout types without duplicating the core structure.
+
+## Utility Class Merging
+
+The project includes a custom `cn` utility in `src/shared/utils/cn.rs` that combines `clsx` and `tailwind-merge` functionality:
+
+- **Conditional Classes**: Accepts a slice of `Option<&str>`, filtering out `None` values.
+- **Conflict Resolution**: Merges conflicting Tailwind classes using a category-based system, ensuring the last class in a conflict group wins.
+- **Modifier Support**: Handles responsive and state modifiers (`hover:`, `md:`, `dark:`) as separate scopes.

@@ -24,28 +24,40 @@ bun run dev
 
 The project is organized into a clean separation between application logic and reusable primitives. For a deep dive into the design patterns used, see the [Architecture Documentation](docs/architecture.md).
 
-### src/stdlib/ (The Foundation)
-The standard library contains reusable utilities:
-- ui/: A collection of atomic UI components and a registry for discovery.
-- hooks/: A set of reusable reactive hooks.
-- services/: API clients and a global service provider pattern.
+### src/hooks/ (The Foundation)
+Custom reactive hooks encapsulating common browser and state logic (use_toggle, use_is_mounted, use_clipboard).
 
-### src/components/ (The Application)
+### src/core/ (Core Infrastructure)
+- api.rs: HTTP client for API communication.
+- provider.rs: Service initialization and context provisioning.
+- state.rs: Application-wide state signals.
+- errors.rs: Error types and user-friendly messages.
+
+### src/ui/ (The Application)
 - layout/: Global shell components (Header, Sidebar, MainLayout).
 - views/: Page-level components.
 - shared/: Application-specific shared components.
 
+### src/shared/ (Shared Utilities)
+- theme.rs: Light/Dark theme management with localStorage persistence.
+- storage.rs: Reactive wrappers for browser local storage.
+- utils/cn.rs: Custom clsx + tailwind-merge utility for conditional class merging.
+
 ## Documentation
 
-Detailed documentation for the built-in library is available:
+Detailed documentation is available:
+- [Architecture](docs/architecture.md)
+- [Getting Started](docs/getting-started.md)
 - [UI Library Reference](docs/ui-library.md)
 - [Hooks Reference](docs/hooks.md)
+- [Design Patterns](docs/patterns.md)
+- [Testing Strategy](docs/testing.md)
 
 ## Configuration
 
-- Tailwind: Configured in tailwind.config.js.
-- Builds: Managed via package.json scripts and Trunk.toml.
-- Routing: Signal-based routing implemented in app.rs.
+- Tailwind: Configured in input.css and package.json scripts.
+- Builds: Managed via package.json scripts and Trunk.
+- Routing: URL-based routing using leptos_router.
 
 ## License
 

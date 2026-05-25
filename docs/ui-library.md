@@ -1,6 +1,6 @@
 # UI Library
 
-The UI library provides a set of reusable components built with Leptos and Tailwind CSS.
+The UI library provides a set of reusable components built with Leptos and Tailwind CSS, located in `src/ui/shared/`.
 
 ## Components
 
@@ -29,3 +29,32 @@ A validated text input field.
 ### MultiSelect
 A dropdown for selecting multiple options.
 - **Props**: `options` (Vec of value/label pairs), `selected` (RwSignal), `placeholder`.
+
+### Accordion
+A state-driven accordion component.
+- **Props**: `Accordion` wrapper, `AccordionItem` with `title` and children.
+- **Features**: Each item manages its own open/closed state, ensuring optimal performance.
+
+### SlidingPanel
+A bottom-sheet-style sliding panel.
+- **Props**: `is_open` (ReadSignal), `on_close` (callback), children.
+
+### CodeBlock
+A syntax-highlighted code display component.
+- **Props**: `code` (raw string), rendered inside a dark-themed container.
+
+### Badge
+A small label/tag for status or categorization.
+- **Props**: `text`, `variant` (color/style variant).
+
+### Card
+A container for grouped content.
+- **Props**: `title`, `children`.
+
+### Modal
+A dialog overlay for focused interactions.
+- **Props**: `is_open`, `on_close`, `title`, `children`.
+
+### Toast
+A temporary notification element.
+- **Props**: `message`, `toast_type` (Info, Success, Warning, Error).

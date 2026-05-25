@@ -1,6 +1,5 @@
-use leptos::prelude::{ElementChild, ClassAttribute};
 use leptos::prelude::*;
-use crate::components::StatsCard;
+use crate::ui::shared::StatsCard;
 
 #[component]
 pub fn DashboardView() -> impl IntoView {

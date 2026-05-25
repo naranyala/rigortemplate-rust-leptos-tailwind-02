@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "tailwind:build": "./node_modules/.bin/tailwindcss -i ./input.css -o ./public/output.css",
-    "tailwind:watch": "./node_modules/.bin/tailwindcss -i ./input.css -o ./public/output.css --watch",
+    "tailwind:build": "./node_modules/.bin/tailwindcss -i ./input.css -o ./output.css",
+    "tailwind:watch": "./node_modules/.bin/tailwindcss -i ./input.css -o ./output.css --watch",
     "dev": "PORT=$(./scripts/find-port.sh) && bun concurrently \"bun run tailwind:watch\" \"trunk serve --port $PORT\"",
     "build": "bun run tailwind:build && trunk build --release",
     "docs": "cargo doc --no-deps"

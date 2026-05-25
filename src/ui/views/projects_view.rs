@@ -1,4 +1,3 @@
-use leptos::prelude::{ElementChild, ClassAttribute};
 use leptos::prelude::*;
 
 #[component]

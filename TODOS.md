@@ -4,14 +4,14 @@ This document tracks the ongoing development and planned improvements for the Le
 
 ## High Priority (Core Infrastructure)
 
-- [ ] Implement Official Routing: Replace the manual AppRoute signal with leptos_router for proper URL synchronization and nested routing.
+- [x] Implement Official Routing: Replace the manual AppRoute signal with leptos_router for proper URL synchronization and nested routing.
 - [x] Global Theme Provider: Implement a ThemeProvider hook and context to support Light/Dark mode switching.
-- [ ] API Integration Layer: Expand stdlib/services/api.rs to include generic request/response handling and interceptors.
-- [x] State Management: Implement a centralized state store (e.g., using provide_context with RwSignal) for complex application state.
+- [ ] API Integration Layer: Expand core/api.rs to include generic request/response handling and interceptors.
+- [x] State Management: Implement a centralized state store using provide_context with RwSignal for complex application state.
 
 ## Medium Priority (UI & UX)
 
-- [ ] Expand UI Library: Add the following components to stdlib/ui/:
+- [ ] Expand UI Library: Add the following components to src/ui/shared/:
     - [x] Data Table with sorting and filtering.
     - [x] Tooltips and Popovers.
     - [x] Form Input validation components.
@@ -24,13 +24,13 @@ This document tracks the ongoing development and planned improvements for the Le
 
 - [ ] Automated Testing Suite:
     - [ ] Implement wasm-bindgen-test for all UI components.
-    - [ ] Add unit tests for every hook in stdlib/hooks/common.rs.
+    - [ ] Add unit tests for every hook in src/hooks/mod.rs.
 - [ ] CI/CD Pipeline: Setup GitHub Actions for automated linting, type-checking, and build verification.
-- [ ] Documentation Site: Generate a static documentation site from the CatalogView and HooksGallery.
+- [ ] Documentation Site: Generate a static documentation site from CatalogView and Hooks views.
 - [ ] Custom Tailwind Plugin: Create a project-specific Tailwind plugin for consistent spacing and color palettes.
 
 ## Maintenance
 
 - [ ] Upgrade to latest Leptos patches.
 - [ ] Optimize WASM binary size using wasm-opt.
-- [ ] Refactor registry.rs to dynamically discover components.
+- [ ] Remove old registry.rs reference.

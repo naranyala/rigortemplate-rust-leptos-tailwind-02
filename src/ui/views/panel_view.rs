@@ -1,6 +1,6 @@
 use leptos::prelude::*;
-use crate::shared::panel::SlidingPanel;
-use crate::shared::code_block::CodeBlock;
+use crate::ui::shared::panel::SlidingPanel;
+use crate::ui::shared::code_block::CodeBlock;
 
 #[component]
 pub fn PanelView() -> impl IntoView {
@@ -8,17 +8,7 @@ pub fn PanelView() -> impl IntoView {
 
     view! {
         <div class="min-h-screen p-8 lg:p-16 max-w-3xl mx-auto space-y-12">
-            <div class="space-y-4 text-center">
-                <div class="inline-flex items-center px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 text-xs font-bold uppercase tracking-wider mb-4">
-                    "Mobile UX"
-                </div>
-                <h2 class="text-4xl font-extrabold text-slate-900 tracking-tight">"Sliding Bottom Sheet"</h2>
-                <p class="text-lg text-slate-500 max-w-xl mx-auto leading-relaxed">
-                    "Bring native mobile interaction patterns to the web with an elegant sliding-up panel."
-                </p>
-            </div>
-
-                <div class="flex flex-col items-center justify-center py-20 space-y-8">
+            <div class="flex flex-col items-center justify-center py-20 space-y-8">
                     <div class="relative group">
                         <div class="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl blur opacity-30 group-hover:opacity-50 transition-opacity"></div>
                         <button 

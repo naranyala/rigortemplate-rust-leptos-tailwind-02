@@ -1,26 +1,23 @@
-use serde::{Serialize, Deserialize};
 use thiserror::Error;
 
-#[allow(dead_code)]
-#[derive(Error, Debug, Clone, Serialize, Deserialize)]
+#[derive(Error, Debug, Clone)]
 pub enum AppError {
     #[error("Network error: {0}")]
     Network(String),
-    
+
     #[error("Validation failed: {0}")]
     Validation(String),
-    
+
     #[error("Internal server error: {0}")]
     Internal(String),
-    
+
     #[error("Data corruption: {0}")]
     Serialization(String),
-    
+
     #[error("Unknown error occurred")]
     Unknown,
 }
 
-#[allow(dead_code)]
 impl AppError {
     pub fn to_user_message(&self) -> String {
         match self {

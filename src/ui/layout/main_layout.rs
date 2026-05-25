@@ -1,8 +1,8 @@
 use leptos::prelude::*;
-use crate::components::layout::{Header, Sidebar};
+use crate::ui::layout::{Header, Sidebar};
 
-use crate::shared::toasts::use_toasts;
-use crate::shared::toast::Toast;
+use crate::ui::shared::toasts::use_toasts;
+use crate::ui::shared::toast::Toast;
 
 
 #[component]
@@ -10,7 +10,7 @@ pub fn MainLayout(children: Children) -> impl IntoView {
     let (toasts, _set_toasts) = use_toasts();
 
     view! {
-        <div class="flex h-screen overflow-hidden bg-slate-50 text-slate-900 font-sans">
+        <div class="flex h-screen overflow-hidden bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans transition-colors duration-300">
             <Sidebar />
             <div class="flex-1 flex flex-col overflow-hidden relative">
                 <Header />

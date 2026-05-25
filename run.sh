@@ -31,7 +31,7 @@ bun run tailwind:watch &
 TAILWIND_PID=$!
 
 # Start Trunk with the detected port
-trunk serve --port $PORT || {
+trunk serve --port $PORT --open false || {
     kill $TAILWIND_PID
     log_error "Trunk server failed to start. Ensure Rust and WASM target are correctly installed."
 }

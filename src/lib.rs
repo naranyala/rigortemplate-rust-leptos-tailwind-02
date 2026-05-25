@@ -2,12 +2,12 @@ use leptos::prelude::*;
 use wasm_bindgen::prelude::*;
 
 mod app;
-mod components;
 pub mod core;
+pub mod hooks;
 pub mod shared;
+pub mod ui;
 
 use crate::app::App;
-
 
 #[wasm_bindgen(start)]
 pub fn main() {
