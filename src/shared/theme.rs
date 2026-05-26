@@ -24,11 +24,11 @@ pub struct ThemeContext {
 }
 
 pub fn provide_theme_context() {
-    let initial_theme = window()
-        .and_then(|win| win.local_storage().ok().flatten())
-        .and_then(|storage| storage.get_item("theme").ok().flatten())
-        .map(|t| if t == "dark" { Theme::Dark } else { Theme::Light })
-        .unwrap_or(Theme::Light);
+     let initial_theme = window()
+         .and_then(|win| win.local_storage().ok().flatten())
+         .and_then(|storage| storage.get_item("theme").ok().flatten())
+         .map(|t| if t == "dark" { Theme::Dark } else { Theme::Light })
+         .unwrap_or(Theme::Dark);
 
     let (theme, set_theme) = signal(initial_theme);
 

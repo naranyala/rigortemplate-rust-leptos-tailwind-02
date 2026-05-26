@@ -32,19 +32,19 @@ pub(crate) fn highlight_code(code: &str) -> String {
     while i < len {
         let c = bytes[i];
 
-        // Line comment: //
-        if c == b'/' && i + 1 < len && bytes[i + 1] == b'/' {
-            let start = i;
-            while i < len && bytes[i] != b'\n' {
-                i += 1;
-            }
-            let text = escape_html(&code[start..i]);
-            result.push_str(&format!(
-                "<span class=\"text-slate-500 italic\">{}</span>",
-                text
-            ));
-            continue;
-        }
+             // Line comment: //
+             if c == b'/' && i + 1 < len && bytes[i + 1] == b'/' {
+                 let start = i;
+                 while i < len && bytes[i] != b'\n' {
+                     i += 1;
+                 }
+                 let text = escape_html(&code[start..i]);
+                 result.push_str(&format!(
+                     "<span class=\"text-slate-400 italic\">{}</span>",
+                     text
+                 ));
+                 continue;
+             }
 
         // Raw string: r#"..."#
         if c == b'r' && i + 2 < len && bytes[i + 1] == b'#' && bytes[i + 2] == b'"' {
@@ -135,15 +135,15 @@ pub(crate) fn highlight_code(code: &str) -> String {
             let word = &code[start..i];
             let text = escape_html(word);
 
-            // Macro: name!
-            if i < len && bytes[i] == b'!' {
-                result.push_str(&format!(
-                    "<span class=\"text-yellow-300\">{}!</span>",
-                    text
-                ));
-                i += 1;
-                continue;
-            }
+             // Macro: name!
+             if i < len && bytes[i] == b'!' {
+                 result.push_str(&format!(
+                     "<span class=\"text-yellow-400\">{}</span><span class=\"text-yellow-300\">!</span>",
+                     text
+                 ));
+                 i += 1;
+                 continue;
+             }
 
             // Keyword
             if is_keyword(word) {
